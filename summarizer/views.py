@@ -63,7 +63,7 @@ class SummarizeView(APIView):
 
             # 3. Define o prompt
             # (Limitamos o conteúdo raspado para não estourar o limite de tokens)
-            max_length = 15000 # ~3500 tokens
+            max_length = 22000 # ~5000 tokens
             prompt_texto = conteudo_raspado[:max_length]
 
             # 4. Chama a API
@@ -76,10 +76,10 @@ class SummarizeView(APIView):
                     },
                     {
                         "role": "user",
-                        "content": f"Resuma o seguinte texto em um parágrafo: \n\n{prompt_texto}"
+                        "content": f"Resuma o seguinte texto em até 2 parágrafos: \n\n{prompt_texto}"
                     }
                 ],
-                temperature=0.3, # Baixa temperatura para resumos mais "diretos"
+                temperature=0.4, # Baixa temperatura para resumos mais "diretos"
             )
 
             # 5. Pega o resumo da resposta
